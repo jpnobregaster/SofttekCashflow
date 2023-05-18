@@ -1,9 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Softtek.Cashflow.Infra.Persistence.Context.SqlServer
+using Softtek.Cashflow.Domain.Entities.Transactions.Model;
+
+namespace Softtek.Cashflow.Infra.Persistence.Context.SqlServer.Context
 {
     public class CashflowSqlServerContext : DbContext
     {
+        public DbSet<CashflowModel> CashFlows { get; set; }
+
         public CashflowSqlServerContext() : base()
         {
         }

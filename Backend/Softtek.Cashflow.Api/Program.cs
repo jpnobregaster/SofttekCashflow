@@ -2,8 +2,7 @@ using Softtek.Cashflow.Infra.IoC.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDependencyInjectionIoc();
-
+builder.Services.AddDependencyInjectionIoC();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
