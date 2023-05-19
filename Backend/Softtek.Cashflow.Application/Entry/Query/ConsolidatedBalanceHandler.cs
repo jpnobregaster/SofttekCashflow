@@ -24,7 +24,7 @@ namespace Softtek.Cashflow.Application.Entry.Query
                 {
                     return new ConsolidatedBalanceViewModel
                     {
-                        Date = flow.Key,
+                        Date = flow.Key.Date,
                         Balance = flow.Sum(x => x.Value)
                     };
                 })

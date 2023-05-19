@@ -1,0 +1,31 @@
+<div class="container d-flex h-75 border-1 border-danger">
+    <div class="row align-self-center w-100">
+        <form [formGroup]="entryForm" novalidate>
+            <div class="form-row align-items-center">
+              <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">Ultize a tecla - após digitar um número, para fazer um lançamento negativo.</label>
+                <div class="input-group mb-2 mt-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">R$</div>
+                    </div>
+                    <input 
+                        currencyMask  
+                        type="text" 
+                        formControlName="entry" 
+                        [options] = "{ prefix: '', thousands: '.', decimal: ',' }"  
+                        class="form-control" 
+                        [ngClass]="{ 'is-invalid': submitted && fields['entry'].errors }" 
+                        id="inlineFormInputGroup" 
+                        placeholder="Digite um número monetário">
+                    </div>
+                    <div *ngIf="submitted && fields['entry']?.errors" class="text-danger">
+                        <div *ngIf="fields?.['entry']?.errors?.['required']">Campo é obrigatório</div>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" (click)="onClickSubmit()" class="btn btn-primary mb-2 float-end">Enviar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
