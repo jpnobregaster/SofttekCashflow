@@ -19,12 +19,12 @@ namespace Softtek.Cashflow.Application.Entry.Query
             var consolidatedCashFlows = await _transactionRepository.GetConsolidatedBalance();
 
             return consolidatedCashFlows
-                .GroupBy(x => x.ConsolidatedAt)
+                .GroupBy(x => x.ConsolidatedAt.Value.Date)
                 .Select(flow =>
                 {
                     return new ConsolidatedBalanceViewModel
                     {
-                        Date = flow.Key.Value,
+                        Date = flow.Key,
                         Balance = flow.Sum(x => x.Value)
                     };
                 })

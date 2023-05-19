@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Softtek.Cashflow.Infra", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Softtek.Cashflow.Infra.IoC", "Softtek.Cashflow.Infra.IoC\Softtek.Cashflow.Infra.IoC.csproj", "{BB2E8717-51AA-4475-8403-DF0C580687B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Softtek.Cashflow.Application", "Softtek.Cashflow.Application\Softtek.Cashflow.Application.csproj", "{B4735B4C-5F8E-4292-A9BD-ADB82FD40333}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Softtek.Cashflow.Application", "Softtek.Cashflow.Application\Softtek.Cashflow.Application.csproj", "{B4735B4C-5F8E-4292-A9BD-ADB82FD40333}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
