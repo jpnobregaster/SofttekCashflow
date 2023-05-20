@@ -1,7 +1,7 @@
 <h1 align="center">SofttekCashflow</h1>
 
 <p align="center">
-  <i>Aplicação de fluxo de caixa para teste na empresa <b>Softtek<n> .
+	Aplicação de fluxo de caixa para teste na empresa <b>Softtek<n> .
   <br>
 </p>
 
@@ -9,7 +9,7 @@
 <ul>
     <li><a href="#ins">Instalação</a></li>
     <li><a href="#arq">Arquitetura</a></li>
-    <li><a href="#fer">Ferramentas</a> 
+    <li><a href="#fer">Ferramentas</a></li>
 </ul>
 <h2 id="ins">Instalação</h2>
 <p>Dependências: <a href="https://dotnet.microsoft.com/en-us/download/dotnet/7.0">.Net 7.0.5</a>, <a href="https://nodejs.org/dist/v18.16.0/">Node 18.16.0</a> e <a href="https://www.docker.com/products/docker-desktop/">Docker</a>.</p>
