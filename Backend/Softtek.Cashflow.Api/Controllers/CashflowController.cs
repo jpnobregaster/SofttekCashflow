@@ -1,3 +1,5 @@
+using AutoMapper;
+
 using FluentValidation;
 
 using MediatR;
@@ -6,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using Softtek.Cashflow.Application.Entry.Command;
 using Softtek.Cashflow.Application.Entry.Query;
+using Softtek.Cashflow.Domain.Common.ViewModel;
 using Softtek.Cashflow.Domain.ViewModel.Cashflow;
 
 namespace Softtek.Cashflow.Api.Controllers
@@ -20,56 +23,106 @@ namespace Softtek.Cashflow.Api.Controllers
         private readonly IMediator _mediator;
         private readonly IValidator<CashflowCommand> _validator;
         private readonly ILogger<CashflowController> _logger;
+        private readonly IMapper _mapper;
         /// <summary>
         /// Construtor
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="mediator"></param>
         /// <param name="validator"></param>
-        public CashflowController(ILogger<CashflowController> logger, IMediator mediator, IValidator<CashflowCommand> validator)
+        public CashflowController(ILogger<CashflowController> logger, IMediator mediator, IValidator<CashflowCommand> validator,
+            IMapper mapper)
         {
             _logger = logger;
             _mediator = mediator;
             _validator = validator;
+            _mapper = mapper;
         }
         /// <summary>
         /// Método para resgatar consolidações diárias para relatório de balanço
         /// </summary>
         /// <returns></returns>
         [HttpGet(Name = "ConsolidatedDailyBalance")]
-        [ProducesResponseType(typeof(ConsolidatedBalanceViewModel), 200)]
+        [ProducesResponseType(typeof(UnknownErrorViewModel), 500)]
+        [ProducesResponseType(typeof(IList<ConsolidatedBalanceViewModel>), 200)]
         public async Task<IActionResult> GetConsolidatedDailyBallance()
         {
-            _logger.LogInformation("Iniciando consulta de dados para geração do relatório de balanco consolidado diário");
+            try
+            {
+                _logger.LogInformation("Iniciando consulta de dados para geração do relatório de balanco consolidado diário");
 
-            var query = new ConsolidatedBalanceQuery();
+                var consolidatedDailyBalance = await _mediator.Send(new ConsolidatedBalanceQuery());
 
-            var consolidatedDailyBalance = await _mediator.Send(query);
+                var result = _mapper.Map<IList<ConsolidatedBalanceViewModel>>(consolidatedDailyBalance);
 
-            _logger.LogInformation("Iniciando consulta de dados para geração do relatório de balanco consolidado diário");
+                _logger.LogInformation("Iniciando consulta de dados para geração do relatório de balanco consolidado diário");
 
-            return Ok(consolidatedDailyBalance);
+                return StatusCode(200, result);
+            }
+            catch (Exception)
+            {
+                _logger.LogDebug("Foi encontrado um erro não esperado");
+
+                UnknownErrorViewModel errorDto = new()
+                {
+                    Error = "Erro desconhecido"
+                };
+
+                return StatusCode(500, errorDto);
+            }
         }
         /// <summary>
-        /// Método para entrada de lançamentos para o fluxo de caixa
+        /// 
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>
         [HttpPost(Name = "Entring")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(ValidateErrorViewModel), 400)]
+        [ProducesResponseType(typeof(UnknownErrorViewModel), 500)]
         public async Task<IActionResult> EntryAsync(CashflowCommand command)
         {
-            _logger.LogInformation("Iniciando entrada de lançamentos. Valor: {0}", command.Value);
+            try
+            {
+                _logger.LogDebug("Iniciando entrada de lançamentos");
 
-            var validationResult = await _validator.ValidateAsync(command);
+                var validationResult = await _validator.ValidateAsync(command);
 
-            if(!validationResult.IsValid)
-                return BadRequest(validationResult.Errors.SelectMany(error => error.ErrorMessage).ToList());
+                if (!validationResult.IsValid)
+                    throw new ValidationException("", validationResult.Errors);
 
-            await _mediator.Send(command);
+                await _mediator.Send(command);
 
-            _logger.LogInformation("Valor: {0} adicionado com sucesso", command.Value);
+                _logger.LogDebug("Valor adicionado com sucesso");
 
-            return Ok();
+                return StatusCode(200);
+            }
+
+            catch (ValidationException exception)
+            {
+                string[] validationErrors = exception.Errors
+                    .Select(e => e.ErrorMessage).ToArray();
+
+                _logger.LogDebug($"Foi encontrados erros de validação de dados de entrada { string.Join(",", validationErrors) }");
+
+                ValidateErrorViewModel errorDto = new()
+                {
+                    Errors = validationErrors
+                };
+
+                return StatusCode(400, errorDto);
+            }
+            catch (Exception)
+            {
+                _logger.LogDebug("Foi encontrado um erro não esperado");
+
+                UnknownErrorViewModel errorDto = new()
+                {
+                    Error = "Erro desconhecido"
+                };
+
+                return StatusCode(500, errorDto);
+            }
         }
     }
 }

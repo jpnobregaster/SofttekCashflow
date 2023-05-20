@@ -1,11 +1,12 @@
 ﻿using MediatR;
 
+using Softtek.Cashflow.Domain.Entities.Transactions.Model;
 using Softtek.Cashflow.Domain.Entities.Transactions.Repository;
 using Softtek.Cashflow.Domain.ViewModel.Cashflow;
 
 namespace Softtek.Cashflow.Application.Entry.Query
 {
-    public class ConsolidatedBalanceHandler : IRequestHandler<ConsolidatedBalanceQuery, IList<ConsolidatedBalanceViewModel>>
+    public class ConsolidatedBalanceHandler : IRequestHandler<ConsolidatedBalanceQuery, IList<CashflowModel>>
     {
         private readonly ICashflowRepository _transactionRepository;
 
@@ -14,21 +15,9 @@ namespace Softtek.Cashflow.Application.Entry.Query
             _transactionRepository = transactionRepository;
         }
 
-        public async Task<IList<ConsolidatedBalanceViewModel>> Handle(ConsolidatedBalanceQuery request, CancellationToken cancellationToken)
+        public async Task<IList<CashflowModel>> Handle(ConsolidatedBalanceQuery request, CancellationToken cancellationToken)
         {
-            var consolidatedCashFlows = await _transactionRepository.GetConsolidatedBalance();
-
-            return consolidatedCashFlows
-                .GroupBy(x => x.ConsolidatedAt.Value.Date)
-                .Select(flow =>
-                {
-                    return new ConsolidatedBalanceViewModel
-                    {
-                        Date = flow.Key.Date,
-                        Balance = flow.Sum(x => x.Value)
-                    };
-                })
-                .ToList();
+            return await _transactionRepository.GetConsolidatedBalance();
         }
     }
 }

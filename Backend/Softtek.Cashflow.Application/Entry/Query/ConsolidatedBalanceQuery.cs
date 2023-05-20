@@ -1,10 +1,10 @@
 ﻿using MediatR;
 
-using Softtek.Cashflow.Domain.ViewModel.Cashflow;
+using Softtek.Cashflow.Domain.Entities.Transactions.Model;
 
 namespace Softtek.Cashflow.Application.Entry.Query
 {
-    public class ConsolidatedBalanceQuery : IRequest<IList<ConsolidatedBalanceViewModel>>
+    public class ConsolidatedBalanceQuery : IRequest<IList<CashflowModel>>
     {
     }
 }
