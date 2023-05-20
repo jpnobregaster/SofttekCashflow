@@ -26,7 +26,7 @@ frontend na porta http://localhost:4200 e backend na porta: http://localhost:500
 Essas portas podem ser alteradas no arquivo <b>docker-composer.yml</b>.
 
 O banco de dados roda em memória, não sendo necessário nenhum tipo de configuração.
-Para acessar o swagger da api, utilize o link:  http://localhost:5000/index.html.
+Para acessar o swagger da api, utilize o link:  http://localhost:5000/swagger/index.html.
 
 As depêndencias de componentes, tanto do frontend quanto do backend são instaladas automáticamente durante a execução dos scripts docker.
 </p>
