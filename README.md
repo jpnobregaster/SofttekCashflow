@@ -7,11 +7,11 @@
 
 <h2>Sumário</h2>
 <ul>
-    <li><a href="#ins">Instalação</a></li>
+    <li><a href="#ins">Instalação e Configuração</a></li>
     <li><a href="#arq">Arquitetura</a></li>
     <li><a href="#fer">Ferramentas</a></li>
 </ul>
-<h2 id="ins">Instalação</h2>
+<h2 id="ins">Instalação e Configuração</h2>
 <p>Dependências: <a href="https://dotnet.microsoft.com/en-us/download/dotnet/7.0">.Net 7.0.5</a>, <a href="https://nodejs.org/dist/v18.16.0/">Node 18.16.0</a> e <a href="https://www.docker.com/products/docker-desktop/">Docker</a>.</p>
 Clone
 
@@ -33,6 +33,14 @@ O banco de dados roda em memória, não sendo necessário nenhum tipo de configu
 Para acessar o swagger da api, utilize o link:  http://localhost:5000/swagger/index.html.
 
 As depêndencias de componentes, tanto do frontend quanto do backend são instaladas automáticamente durante a execução dos scripts docker.
+
+A Consolidação foi configurada para rodar a cada 1min, para uma melhor visualização da tarefa agendada, e pode ser alterado facilmente no arquivo <b>appsettings.json</b>, na raiz da API.
+
+    "SchaduledJob": {
+       "JobKey": "ConsolidationJobKey",
+       "TriggerKey": "ConsolidationJobTriggerKey",
+       "Cron": "0 0/1 * * * ?"
+    }
 </p>
 
 <h2 id="arq">Arquitetura</h2>
@@ -50,4 +58,3 @@ O backend é dividido em: api, domin, application, infra e IoC. As requisições
  - Moq
  - NUnit
  - Swagger
-
