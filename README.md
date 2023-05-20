@@ -1,7 +1,7 @@
 <h1 align="center">SofttekCashflow</h1>
 
 <p align="center">
-	Aplicação de fluxo de caixa para teste na empresa <b>Softtek<n> .
+	Aplicação de fluxo de caixa para teste na empresa <b>Softtek</b> .
   <br>
 </p>
 
