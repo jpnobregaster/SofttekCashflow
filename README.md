@@ -13,6 +13,10 @@
 </ul>
 <h2 id="ins">Instalação</h2>
 <p>Dependências: <a href="https://dotnet.microsoft.com/en-us/download/dotnet/7.0">.Net 7.0.5</a>, <a href="https://nodejs.org/dist/v18.16.0/">Node 18.16.0</a> e <a href="https://www.docker.com/products/docker-desktop/">Docker</a>.</p>
+Clone
+
+    git clone https://github.com/jpnobregaster/SofttekCashflow.git
+
 <p>Abra um console na raiz da aplicação, para executarmos o <b>docker-composer.yml</b>. No console execute:
 
     docker-compose build
