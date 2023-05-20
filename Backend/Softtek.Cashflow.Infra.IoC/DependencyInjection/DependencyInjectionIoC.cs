@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using Quartz;
@@ -19,11 +20,11 @@ namespace Softtek.Cashflow.Infra.IoC.DependencyInjection
 {
     public static class DependencyInjectionIoC
     {
-        public static void AddDependencyInjectionIoC(this IServiceCollection services)
+        public static void AddDependencyInjectionIoC(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<CashflowSqlServerContext>(options =>
             {
-                options.UseInMemoryDatabase("Cashflow");
+                options.UseInMemoryDatabase(configuration["DataBase"]);
             });
 
             services.AddMediatR(options => {
@@ -39,9 +40,9 @@ namespace Softtek.Cashflow.Infra.IoC.DependencyInjection
                 quartz.AddJob<IConsolidationSchaduleJob>(opts => opts.WithIdentity(jobKey));
 
                 quartz.AddTrigger(opts => opts
-                    .ForJob(jobKey)
-                    .WithIdentity("ConsolidationJob-trigger")
-                    .WithCronSchedule("0/5 * * * * ?"));
+                   .ForJob(jobKey)
+                   .WithIdentity(configuration["SchaduledJob:TriggerKey"])
+                   .WithCronSchedule(configuration["SchaduledJob:Cron"]));
             });
 
             services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);

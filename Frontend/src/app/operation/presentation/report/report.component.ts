@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CashflowDailyBalanceDto } from '@app/operation/domain/cashflow/dto/cashflow-daily-balance.dto';
 import { CashflowServiceContract } from '@app/operation/domain/cashflow/service/cashflow.service.contract';
 import { AlertServiceConstract } from '@app/shared/domain/service/alert.service.contract';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-report',
@@ -11,20 +12,21 @@ import { AlertServiceConstract } from '@app/shared/domain/service/alert.service.
 export class ReportComponent implements OnInit, OnDestroy {
 
     report!: CashflowDailyBalanceDto[];
+    get$ = new Subscription();
 
     constructor( private alertService: AlertServiceConstract,
         private cashFlowService: CashflowServiceContract)  {
-
     }
 
     ngOnInit() {
         this.alertService.loading();
-        this.cashFlowService.getConsolidatedDailyBalanceObservable().subscribe(report => {
+        this.get$ = this.cashFlowService.getConsolidatedDailyBalanceObservable().subscribe(report => {
             this.report = report;
             this.alertService.close();
-        })
+        });
     }
 
     ngOnDestroy(): void {
+        this.get$.unsubscribe();
     }
 }

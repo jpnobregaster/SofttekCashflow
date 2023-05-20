@@ -10,6 +10,8 @@ using Microsoft.Extensions.Logging;
 
 using Moq;
 
+using NUnit.Framework;
+
 using Softtek.Cashflow.Api.Controllers;
 using Softtek.Cashflow.Application.Entry.Command;
 using Softtek.Cashflow.Application.Entry.Query;

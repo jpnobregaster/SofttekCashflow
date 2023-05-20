@@ -24,8 +24,4 @@
     <ProjectReference Include="..\Softtek.Cashflow.Application\Softtek.Cashflow.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="NewFolder\" />
-  </ItemGroup>
-
 </Project>

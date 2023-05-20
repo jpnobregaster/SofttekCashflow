@@ -3,7 +3,6 @@ import { ErrorHandlerContract } from "../../domain/error/error.handler.contract"
 import { AlertServiceConstract } from "../../domain/service/alert.service.contract";
 import { Injectable } from "@angular/core";
 
-
 @Injectable()
 export class ErrorHandler extends ErrorHandlerContract {
     constructor(private alertService: AlertServiceConstract) {
@@ -12,7 +11,6 @@ export class ErrorHandler extends ErrorHandlerContract {
 
     throw(response: HttpErrorResponse) {
         if (response) {
-            debugger;
             switch(response.status) {
                 case 0: 
                     this.alertService.error('Erro', 'Não foi possível concluir a solicitação', 'Servidor não está disponível');

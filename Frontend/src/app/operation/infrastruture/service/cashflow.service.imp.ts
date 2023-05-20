@@ -8,7 +8,6 @@ import { CashflowServiceContract } from '@app/operation/domain/cashflow/service/
 import { CashflowDailyBalanceDto } from '@app/operation/domain/cashflow/dto/cashflow-daily-balance.dto';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 
-
 @Injectable()
 export class CashflowService extends ServiceBase<CashflowModel> implements CashflowServiceContract {
     override baseUri = `${environment.api.endpoint}/cashflow`;

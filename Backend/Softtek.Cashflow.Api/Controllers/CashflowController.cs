@@ -25,11 +25,12 @@ namespace Softtek.Cashflow.Api.Controllers
         private readonly ILogger<CashflowController> _logger;
         private readonly IMapper _mapper;
         /// <summary>
-        /// Construtor
+        /// 
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="mediator"></param>
         /// <param name="validator"></param>
+        /// <param name="mapper"></param>
         public CashflowController(ILogger<CashflowController> logger, IMediator mediator, IValidator<CashflowCommand> validator,
             IMapper mapper)
         {
@@ -39,7 +40,7 @@ namespace Softtek.Cashflow.Api.Controllers
             _mapper = mapper;
         }
         /// <summary>
-        /// Método para resgatar consolidações diárias para relatório de balanço
+        /// Método para geração do relátório de balanço diário consolidado
         /// </summary>
         /// <returns></returns>
         [HttpGet(Name = "ConsolidatedDailyBalance")]
@@ -72,7 +73,7 @@ namespace Softtek.Cashflow.Api.Controllers
             }
         }
         /// <summary>
-        /// 
+        /// Método para lançamento de entradas(Crédito/Débito)
         /// </summary>
         /// <param name="command"></param>
         /// <returns></returns>

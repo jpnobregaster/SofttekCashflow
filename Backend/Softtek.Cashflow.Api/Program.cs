@@ -2,7 +2,7 @@ using Softtek.Cashflow.Infra.IoC.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDependencyInjectionIoC();
+builder.Services.AddDependencyInjectionIoC(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -24,8 +24,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("CorsPolicy");
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
