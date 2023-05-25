@@ -9,7 +9,8 @@
 <ul>
     <li><a href="#ins">Instalação e Configuração</a></li>
     <li><a href="#arq">Arquitetura</a></li>
-    <li><a href="#fer">Ferramentas</a></li>
+    <li><a href="#des">Diagrama da aplicação</a></li>
+	<li><a href="#fer">Ferramentas</a></li>
 </ul>
 <h2 id="ins">Instalação e Configuração</h2>
 <p>Dependências: <a href="https://dotnet.microsoft.com/en-us/download/dotnet/7.0">.Net 7.0.5</a>, <a href="https://nodejs.org/dist/v18.16.0/">Node 18.16.0</a> e <a href="https://www.docker.com/products/docker-desktop/">Docker</a>.</p>
@@ -49,7 +50,7 @@ As aplicações seguem design patterns como DDD, Solid, Clean Code, Repository e
 O backend é dividido em: api, domin, application, infra e IoC. As requisições são baseadas em commands e queries utilizado um conceito do pattern CQRC. O frontend está estruturado em camadas, seguindo principios de Solid, Clean Code e um guia de estilo fornecida pelo Angular.
 
 
-**Diagrama**
+<h2 id="des">Diagrama da aplicação</h2>
 
 ![Diagrama da aplicação](https://github.com/jpnobregaster/SofttekCashflow/blob/main/diagrama.png)
 
