@@ -48,8 +48,7 @@ A Consolidação foi configurada para rodar a cada 1min, para uma melhor visuali
 As aplicações seguem design patterns como DDD, Solid, Clean Code, Repository e IoC, MVC, ViewModels.
 O backend é dividido em: api, domin, application, infra e IoC. As requisições são baseadas em commands e queries utilizado um conceito do pattern CQRC. O frontend está estruturado em camadas, seguindo principios de Solid, Clean Code e um guia de estilo fornecida pelo Angular.
 <p>
-**Diagrama**
-
+<h2 id="arq">Diagrama da aplicação</h2>
 ![Diagrama da aplicação](https://github.com/jpnobregaster/SofttekCashflow/blob/main/diagrama.png)
 </p>
 
