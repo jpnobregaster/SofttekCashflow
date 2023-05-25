@@ -50,7 +50,7 @@ O backend é dividido em: api, domin, application, infra e IoC. As requisições
 
 **Diagrama**
 
-![Diagrama da aplicação](https://github.com/jpnobregaster/SofttekCashflow/blob/main/Backend/Softtek.Cashflow.Api/diagram.png)
+![Diagrama da aplicação](https://github.com/jpnobregaster/SofttekCashflow/blob/main/diagram.png)
 
 
 **Frontend**
